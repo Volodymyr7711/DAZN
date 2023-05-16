@@ -9,6 +9,36 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>DAZNTests.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>DAZNUITests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>B8F0E3542A0E83D300380D7D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B8F0E3642A0E83D400380D7D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B8F0E36E2A0E83D400380D7D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 	</dict>
 </dict>
 </plist>

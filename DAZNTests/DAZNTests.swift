@@ -9,28 +9,67 @@ import XCTest
 @testable import DAZN
 
 final class DAZNTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    func testScheduleJson() {
+        // Given
+        let json = """
+        {
+        "id":"1",
+        "title":"Liverpool v Porto",
+        "subtitle":"UEFA Champions League",
+        "date":"2023-05-16T03:20:27.224Z",
+        "imageUrl":"https://firebasestorage.googleapis.com/v0/b/dazn-recruitment/o/310176837169_image-header_pDach_1554579780000.jpeg?alt=media&token=1777d26b-d051-4b5f-87a8-7633d3d6dd20"
         }
+        """.data(using: .utf8)!
+
+        // When
+        let schedule = try! JSONDecoder().decode(ScheduleModel.self, from: json)
+
+        // Then
+        XCTAssertNotNil(schedule)
     }
 
+    func testEventJson() {
+        // Given
+        let json = """
+        {
+        "id":"1",
+        "title":"Liverpool v Porto",
+        "subtitle":"UEFA Champions League",
+        "date":"2023-05-16T03:20:27.224Z",
+        "imageUrl":"https://firebasestorage.googleapis.com/v0/b/dazn-recruitment/o/310176837169_image-header_pDach_1554579780000.jpeg?alt=media&token=1777d26b-d051-4b5f-87a8-7633d3d6dd20",
+        "videoUrl":"https://firebasestorage.googleapis.com/v0/b/dazn-recruitment/o/promo.mp4?alt=media"
+        }
+        """.data(using: .utf8)!
+        
+        // When
+        let schedule = try! JSONDecoder().decode(BaseModel.self, from: json)
+
+        // Then
+        XCTAssertNotNil(schedule)
+    }
+    
+    func testInvalidDate() throws {
+        // Given
+        let dateString = "2023-05-20"
+        
+        // When
+        let formattedDate = dateString.getFormattedDate()
+        
+        // Then
+        XCTAssertEqual(formattedDate, "Invalid date string")
+    }
+    
+    func testGetFormattedDate() {
+        // Today
+        let todayString = "2023-05-17T09:30:00.000Z"
+        XCTAssertEqual(todayString.getFormattedDate(), "Today, 11:30")
+        
+        // Yesterday
+        let yesterdayString = "2023-05-16T14:45:00.000Z"
+        XCTAssertEqual(yesterdayString.getFormattedDate(), "Yesterday, 16:45")
+        
+        // Tomorrow
+        let tomorrowString = "2023-05-18T18:15:00.000Z"
+        XCTAssertEqual(tomorrowString.getFormattedDate(), "Tomorrow, 20:15")
+    }
 }

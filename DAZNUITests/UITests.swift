@@ -1,13 +1,13 @@
 //
-//  DAZNUITests.swift
+//  UITests.swift
 //  DAZNUITests
 //
-//  Created by Volodymyr Mendyk on 12/05/2023.
+//  Created by Volodymyr Mendyk on 17/05/2023.
 //
 
 import XCTest
 
-final class DAZNUITests: XCTestCase {
+final class UITests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -16,10 +16,6 @@ final class DAZNUITests: XCTestCase {
         continueAfterFailure = false
 
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
     func testExample() throws {
@@ -37,5 +33,17 @@ final class DAZNUITests: XCTestCase {
                 XCUIApplication().launch()
             }
         }
+    }
+
+    func testScheduleView() throws {
+        // Navigate to the ScheduleView
+        let app = XCUIApplication()
+        app.launch()
+        // Navigate to the ScheduleView
+        app.buttons["Schedule"].tap()
+        
+        // Wait for the view to appear
+        let scheduleView = app.navigationBars["Schedule"]
+        XCTAssertTrue(scheduleView.waitForExistence(timeout: 5.0))
     }
 }
